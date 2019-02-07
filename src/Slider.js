@@ -87,13 +87,21 @@ export default class Slider extends PureComponent {
      * default blue gradient image.
      */
     minimumTrackTintColor: PropTypes.string,
+ /**
+     * Custom component used for the track to the left of the button.
+     */
+    customMinimumTrack: PropTypes.any,
+
 
     /**
      * The color used for the track to the right of the button. Overrides the
      * default blue gradient image.
      */
     maximumTrackTintColor: PropTypes.string,
-
+    /**
+     * Custom component used for the track to the right of the button.
+     */
+    customMaximumTrack: PropTypes.any,
     /**
      * The color used for the thumb.
      */
@@ -219,7 +227,9 @@ export default class Slider extends PureComponent {
       minimumValue,
       maximumValue,
       minimumTrackTintColor,
+      customMinimumTrack,
       maximumTrackTintColor,
+      customMaximumTrack,
       thumbTintColor,
       thumbImage,
       styles,
@@ -282,10 +292,13 @@ export default class Slider extends PureComponent {
           renderToHardwareTextureAndroid
           onLayout={this._measureTrack}
         />
+        {customMaximumTrack}
         <Animated.View
           renderToHardwareTextureAndroid
           style={[mainStyles.track, trackStyle, minimumTrackStyle]}
-        />
+        >
+        {customMinimumTrack}
+        </Animated.View>
         <Animated.View
           onLayout={this._measureThumb}
           renderToHardwareTextureAndroid
